@@ -30,5 +30,9 @@ Kadangi failai per dideli, jei isdalinti i chuncks <br />
 /nanofilt_auto/filtered_SRR34323118.fastq <br />
 
 
-$ split -l 18500 SRR34323118.fastq original.fastq_
-$ split -l 18500 filtered_SRR34323118.fastq filtered.fastq_
+$ split -l 18500 SRR34323118.fastq original.fastq_ <br />
+$ split -l 18500 filtered_SRR34323118.fastq filtered.fastq_ <br />
+
+Kad gauti ilna faila paleisti: <br />
+$ cat filtered.fastq_* >> filtered_SRR34323118.fastq <br />
+$ cat original.fastq_* >> SRR34323118.fastq <br />
