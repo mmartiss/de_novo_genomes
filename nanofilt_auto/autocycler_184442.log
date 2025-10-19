@@ -1,0 +1,611 @@
+==========================================
+Autocycler Pipeline
+Input: filtered_SRR34323118.fastq
+Started: Sat Oct 11 15:49:24 EEST 2025
+==========================================
+
+[Sat Oct 11 15:49:24 EEST 2025] STEP 1: Estimating genome size...
+Estimated genome size: 4342670
+
+[Sat Oct 11 15:50:12 EEST 2025] STEP 2: Subsampling reads...
+
+Starting autocycler subsample (2025-10-11 15:50:12)
+    This command subsamples a long-read set into subsets that are maximally
+independent from each other.
+
+Settings:
+  --reads filtered_SRR34323118.fastq
+  --out_dir subsampled_reads
+  --genome_size 4342670
+  --count 4
+  --min_read_depth 25
+  --seed 0
+
+Input FASTQ:
+  Read count: 23527
+  Read bases: 150189101
+  Read N50 length: 7477 bp
+
+
+Calculating subset size (2025-10-11 15:50:12)
+    Autocycler will now calculate the number of reads to put in each subset.
+
+Total read depth: 34.6×
+Mean read length: 6384 bp
+
+Calculating subset sizes:
+  subset_depth = 25 * log_2(4 * total_depth / 25) / 2
+               = 30.9x
+  reads per subset: 20988
+
+
+Subsetting reads (2025-10-11 15:50:12)
+    The reads are now shuffled and grouped into subset files.
+
+subset 1:
+  reads 1-20988
+  subsampled_reads/sample_01.fastq
+
+subset 2:
+  reads 5883-23527 and 1-3343
+  subsampled_reads/sample_02.fastq
+
+subset 3:
+  reads 11765-23527 and 1-9225
+  subsampled_reads/sample_03.fastq
+
+subset 4:
+  reads 17646-23527 and 1-15106
+  subsampled_reads/sample_04.fastq
+
+
+Finished! (2025-10-11 15:50:15)
+    You can now assemble each of the subsampled read sets to produce a set of
+assemblies for input into Autocycler compress.
+
+
+[Sat Oct 11 15:50:15 EEST 2025] STEP 3: Running assemblies...
+[Sat Oct 11 15:50:15 EEST 2025] Assembling sample 01 with Flye...
+
+flye --nano-hq subsampled_reads/sample_01.fastq --threads 8 --out-dir /tmp/slurm-maab9325-184442/.tmpyh1kE0
+
+[2025-10-11 15:50:16] INFO: Starting Flye 2.9.6-b1802
+[2025-10-11 15:50:16] INFO: >>>STAGE: configure
+[2025-10-11 15:50:16] INFO: Configuring run
+[2025-10-11 15:50:16] INFO: Total read length: 133494217
+[2025-10-11 15:50:16] INFO: Reads N50/N90: 7438 / 3229
+[2025-10-11 15:50:16] INFO: Minimum overlap set to 3000
+[2025-10-11 15:50:16] INFO: >>>STAGE: assembly
+[2025-10-11 15:50:16] INFO: Assembling disjointigs
+[2025-10-11 15:50:16] INFO: Reading sequences
+[2025-10-11 15:50:16] INFO: Building minimizer index
+[2025-10-11 15:50:16] INFO: Pre-calculating index storage
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:50:18] INFO: Filling index
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:50:22] INFO: Extending reads
+[2025-10-11 15:50:37] INFO: Overlap-based coverage: 25
+[2025-10-11 15:50:37] INFO: Median overlap divergence: 0.0206323
+0% 90% 100% 
+[2025-10-11 15:50:52] INFO: Assembled 1 disjointigs
+[2025-10-11 15:50:52] INFO: Generating sequence
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:50:53] INFO: Filtering contained disjointigs
+0% 100% 
+[2025-10-11 15:50:54] INFO: Contained seqs: 0
+[2025-10-11 15:50:54] INFO: >>>STAGE: consensus
+[2025-10-11 15:50:54] INFO: Running Minimap2
+[2025-10-11 15:51:05] INFO: Computing consensus
+[2025-10-11 15:51:28] INFO: Alignment error rate: 0.025262
+[2025-10-11 15:51:28] INFO: >>>STAGE: repeat
+[2025-10-11 15:51:28] INFO: Building and resolving repeat graph
+[2025-10-11 15:51:28] INFO: Parsing disjointigs
+[2025-10-11 15:51:28] INFO: Building repeat graph
+0% 100% 
+[2025-10-11 15:51:31] INFO: Median overlap divergence: 0.29245
+[2025-10-11 15:51:31] INFO: Parsing reads
+[2025-10-11 15:51:31] INFO: Aligning reads to the graph
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:51:37] INFO: Aligned read sequence: 118345330 / 124251744 (0.952464)
+[2025-10-11 15:51:37] INFO: Median overlap divergence: 0.0105347
+[2025-10-11 15:51:37] INFO: Mean edge coverage: 26
+[2025-10-11 15:51:37] INFO: Simplifying the graph
+[2025-10-11 15:51:37] INFO: >>>STAGE: contigger
+[2025-10-11 15:51:37] INFO: Generating contigs
+[2025-10-11 15:51:37] INFO: Reading sequences
+[2025-10-11 15:51:38] INFO: Generated 1 contigs
+[2025-10-11 15:51:38] INFO: Added 0 scaffold connections
+[2025-10-11 15:51:38] INFO: >>>STAGE: polishing
+[2025-10-11 15:51:38] INFO: Polishing genome (1/1)
+[2025-10-11 15:51:38] INFO: Running minimap2
+[2025-10-11 15:51:49] INFO: Separating alignment into bubbles
+[2025-10-11 15:52:18] INFO: Alignment error rate: 0.014420
+[2025-10-11 15:52:18] INFO: Correcting bubbles
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:52:41] INFO: >>>STAGE: finalize
+[2025-10-11 15:52:41] INFO: Assembly statistics:
+
+	Total length:	4350361
+	Fragments:	1
+	Fragments N50:	4350361
+	Largest frg:	4350361
+	Scaffolds:	0
+	Mean coverage:	30
+
+[2025-10-11 15:52:41] INFO: Final assembly: /tmp/slurm-maab9325-184442/.tmpyh1kE0/assembly.fasta
+
+Autocycler helper depth filter
+threshold = 3.000
+contig_1: depth=30.000, PASS
+[Sat Oct 11 15:52:41 EEST 2025] Assembling sample 02 with Flye...
+
+flye --nano-hq subsampled_reads/sample_02.fastq --threads 8 --out-dir /tmp/slurm-maab9325-184442/.tmpUbVN2X
+
+[2025-10-11 15:52:41] INFO: Starting Flye 2.9.6-b1802
+[2025-10-11 15:52:41] INFO: >>>STAGE: configure
+[2025-10-11 15:52:41] INFO: Configuring run
+[2025-10-11 15:52:42] INFO: Total read length: 133795090
+[2025-10-11 15:52:42] INFO: Reads N50/N90: 7456 / 3227
+[2025-10-11 15:52:42] INFO: Minimum overlap set to 3000
+[2025-10-11 15:52:42] INFO: >>>STAGE: assembly
+[2025-10-11 15:52:42] INFO: Assembling disjointigs
+[2025-10-11 15:52:42] INFO: Reading sequences
+[2025-10-11 15:52:42] INFO: Building minimizer index
+[2025-10-11 15:52:42] INFO: Pre-calculating index storage
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:52:44] INFO: Filling index
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:52:48] INFO: Extending reads
+[2025-10-11 15:53:04] INFO: Overlap-based coverage: 25
+[2025-10-11 15:53:04] INFO: Median overlap divergence: 0.0209489
+0% 90% 100% 
+[2025-10-11 15:53:20] INFO: Assembled 1 disjointigs
+[2025-10-11 15:53:20] INFO: Generating sequence
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:53:21] INFO: Filtering contained disjointigs
+0% 100% 
+[2025-10-11 15:53:22] INFO: Contained seqs: 0
+[2025-10-11 15:53:22] INFO: >>>STAGE: consensus
+[2025-10-11 15:53:22] INFO: Running Minimap2
+[2025-10-11 15:53:33] INFO: Computing consensus
+[2025-10-11 15:53:55] INFO: Alignment error rate: 0.025411
+[2025-10-11 15:53:55] INFO: >>>STAGE: repeat
+[2025-10-11 15:53:55] INFO: Building and resolving repeat graph
+[2025-10-11 15:53:55] INFO: Parsing disjointigs
+[2025-10-11 15:53:55] INFO: Building repeat graph
+0% 100% 
+[2025-10-11 15:53:57] INFO: Median overlap divergence: 0.29245
+[2025-10-11 15:53:57] INFO: Parsing reads
+[2025-10-11 15:53:58] INFO: Aligning reads to the graph
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:54:03] INFO: Aligned read sequence: 118629036 / 124496830 (0.952868)
+[2025-10-11 15:54:03] INFO: Median overlap divergence: 0.0104887
+[2025-10-11 15:54:03] INFO: Mean edge coverage: 26
+[2025-10-11 15:54:03] INFO: Simplifying the graph
+[2025-10-11 15:54:04] INFO: >>>STAGE: contigger
+[2025-10-11 15:54:04] INFO: Generating contigs
+[2025-10-11 15:54:04] INFO: Reading sequences
+[2025-10-11 15:54:04] INFO: Generated 1 contigs
+[2025-10-11 15:54:04] INFO: Added 0 scaffold connections
+[2025-10-11 15:54:04] INFO: >>>STAGE: polishing
+[2025-10-11 15:54:04] INFO: Polishing genome (1/1)
+[2025-10-11 15:54:04] INFO: Running minimap2
+[2025-10-11 15:54:15] INFO: Separating alignment into bubbles
+[2025-10-11 15:54:43] INFO: Alignment error rate: 0.014338
+[2025-10-11 15:54:43] INFO: Correcting bubbles
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:55:06] INFO: >>>STAGE: finalize
+[2025-10-11 15:55:06] INFO: Assembly statistics:
+
+	Total length:	4350080
+	Fragments:	1
+	Fragments N50:	4350080
+	Largest frg:	4350080
+	Scaffolds:	0
+	Mean coverage:	31
+
+[2025-10-11 15:55:06] INFO: Final assembly: /tmp/slurm-maab9325-184442/.tmpUbVN2X/assembly.fasta
+
+Autocycler helper depth filter
+threshold = 3.100
+contig_1: depth=31.000, PASS
+[Sat Oct 11 15:55:06 EEST 2025] Assembling sample 03 with Flye...
+
+flye --nano-hq subsampled_reads/sample_03.fastq --threads 8 --out-dir /tmp/slurm-maab9325-184442/.tmpQ0pDxb
+
+[2025-10-11 15:55:07] INFO: Starting Flye 2.9.6-b1802
+[2025-10-11 15:55:07] INFO: >>>STAGE: configure
+[2025-10-11 15:55:07] INFO: Configuring run
+[2025-10-11 15:55:07] INFO: Total read length: 134138993
+[2025-10-11 15:55:07] INFO: Reads N50/N90: 7503 / 3236
+[2025-10-11 15:55:07] INFO: Minimum overlap set to 3000
+[2025-10-11 15:55:07] INFO: >>>STAGE: assembly
+[2025-10-11 15:55:07] INFO: Assembling disjointigs
+[2025-10-11 15:55:07] INFO: Reading sequences
+[2025-10-11 15:55:07] INFO: Building minimizer index
+[2025-10-11 15:55:08] INFO: Pre-calculating index storage
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:55:09] INFO: Filling index
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:55:13] INFO: Extending reads
+[2025-10-11 15:55:29] INFO: Overlap-based coverage: 26
+[2025-10-11 15:55:29] INFO: Median overlap divergence: 0.0209009
+0% 90% 100% 
+[2025-10-11 15:55:46] INFO: Assembled 1 disjointigs
+[2025-10-11 15:55:46] INFO: Generating sequence
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:55:47] INFO: Filtering contained disjointigs
+0% 100% 
+[2025-10-11 15:55:47] INFO: Contained seqs: 0
+[2025-10-11 15:55:48] INFO: >>>STAGE: consensus
+[2025-10-11 15:55:48] INFO: Running Minimap2
+[2025-10-11 15:55:58] INFO: Computing consensus
+[2025-10-11 15:56:19] INFO: Alignment error rate: 0.025294
+[2025-10-11 15:56:19] INFO: >>>STAGE: repeat
+[2025-10-11 15:56:19] INFO: Building and resolving repeat graph
+[2025-10-11 15:56:19] INFO: Parsing disjointigs
+[2025-10-11 15:56:19] INFO: Building repeat graph
+0% 100% 
+[2025-10-11 15:56:20] INFO: Median overlap divergence: 0.29245
+[2025-10-11 15:56:20] INFO: Parsing reads
+[2025-10-11 15:56:21] INFO: Aligning reads to the graph
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:56:25] INFO: Aligned read sequence: 119136757 / 124924580 (0.953669)
+[2025-10-11 15:56:25] INFO: Median overlap divergence: 0.0104982
+[2025-10-11 15:56:25] INFO: Mean edge coverage: 27
+[2025-10-11 15:56:25] INFO: Simplifying the graph
+[2025-10-11 15:56:26] INFO: >>>STAGE: contigger
+[2025-10-11 15:56:26] INFO: Generating contigs
+[2025-10-11 15:56:26] INFO: Reading sequences
+[2025-10-11 15:56:26] INFO: Generated 1 contigs
+[2025-10-11 15:56:26] INFO: Added 0 scaffold connections
+[2025-10-11 15:56:26] INFO: >>>STAGE: polishing
+[2025-10-11 15:56:26] INFO: Polishing genome (1/1)
+[2025-10-11 15:56:26] INFO: Running minimap2
+[2025-10-11 15:56:36] INFO: Separating alignment into bubbles
+[2025-10-11 15:57:02] INFO: Alignment error rate: 0.014212
+[2025-10-11 15:57:02] INFO: Correcting bubbles
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:57:24] INFO: >>>STAGE: finalize
+[2025-10-11 15:57:24] INFO: Assembly statistics:
+
+	Total length:	4350359
+	Fragments:	1
+	Fragments N50:	4350359
+	Largest frg:	4350359
+	Scaffolds:	0
+	Mean coverage:	31
+
+[2025-10-11 15:57:24] INFO: Final assembly: /tmp/slurm-maab9325-184442/.tmpQ0pDxb/assembly.fasta
+
+Autocycler helper depth filter
+threshold = 3.100
+contig_1: depth=31.000, PASS
+[Sat Oct 11 15:57:24 EEST 2025] Assembling sample 04 with Flye...
+
+flye --nano-hq subsampled_reads/sample_04.fastq --threads 8 --out-dir /tmp/slurm-maab9325-184442/.tmpueWaX0
+
+[2025-10-11 15:57:24] INFO: Starting Flye 2.9.6-b1802
+[2025-10-11 15:57:24] INFO: >>>STAGE: configure
+[2025-10-11 15:57:24] INFO: Configuring run
+[2025-10-11 15:57:24] INFO: Total read length: 133859954
+[2025-10-11 15:57:24] INFO: Reads N50/N90: 7485 / 3233
+[2025-10-11 15:57:24] INFO: Minimum overlap set to 3000
+[2025-10-11 15:57:24] INFO: >>>STAGE: assembly
+[2025-10-11 15:57:24] INFO: Assembling disjointigs
+[2025-10-11 15:57:24] INFO: Reading sequences
+[2025-10-11 15:57:25] INFO: Building minimizer index
+[2025-10-11 15:57:25] INFO: Pre-calculating index storage
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:57:26] INFO: Filling index
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:57:30] INFO: Extending reads
+[2025-10-11 15:57:44] INFO: Overlap-based coverage: 25
+[2025-10-11 15:57:44] INFO: Median overlap divergence: 0.0208583
+0% 90% 100% 
+[2025-10-11 15:57:58] INFO: Assembled 1 disjointigs
+[2025-10-11 15:57:58] INFO: Generating sequence
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:57:58] INFO: Filtering contained disjointigs
+0% 100% 
+[2025-10-11 15:57:59] INFO: Contained seqs: 0
+[2025-10-11 15:57:59] INFO: >>>STAGE: consensus
+[2025-10-11 15:57:59] INFO: Running Minimap2
+[2025-10-11 15:58:09] INFO: Computing consensus
+[2025-10-11 15:58:30] INFO: Alignment error rate: 0.025472
+[2025-10-11 15:58:31] INFO: >>>STAGE: repeat
+[2025-10-11 15:58:31] INFO: Building and resolving repeat graph
+[2025-10-11 15:58:30] INFO: Parsing disjointigs
+[2025-10-11 15:58:31] INFO: Building repeat graph
+0% 100% 
+[2025-10-11 15:58:32] INFO: Median overlap divergence: 0.29245
+[2025-10-11 15:58:32] INFO: Parsing reads
+[2025-10-11 15:58:32] INFO: Aligning reads to the graph
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:58:37] INFO: Aligned read sequence: 118886125 / 124645262 (0.953796)
+[2025-10-11 15:58:37] INFO: Median overlap divergence: 0.0105086
+[2025-10-11 15:58:37] INFO: Mean edge coverage: 26
+[2025-10-11 15:58:37] INFO: Simplifying the graph
+[2025-10-11 15:58:38] INFO: >>>STAGE: contigger
+[2025-10-11 15:58:38] INFO: Generating contigs
+[2025-10-11 15:58:38] INFO: Reading sequences
+[2025-10-11 15:58:38] INFO: Generated 1 contigs
+[2025-10-11 15:58:38] INFO: Added 0 scaffold connections
+[2025-10-11 15:58:38] INFO: >>>STAGE: polishing
+[2025-10-11 15:58:38] INFO: Polishing genome (1/1)
+[2025-10-11 15:58:38] INFO: Running minimap2
+[2025-10-11 15:58:48] INFO: Separating alignment into bubbles
+[2025-10-11 15:59:17] INFO: Alignment error rate: 0.014405
+[2025-10-11 15:59:17] INFO: Correcting bubbles
+0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% 
+[2025-10-11 15:59:38] INFO: >>>STAGE: finalize
+[2025-10-11 15:59:38] INFO: Assembly statistics:
+
+	Total length:	4350364
+	Fragments:	1
+	Fragments N50:	4350364
+	Largest frg:	4350364
+	Scaffolds:	0
+	Mean coverage:	30
+
+[2025-10-11 15:59:38] INFO: Final assembly: /tmp/slurm-maab9325-184442/.tmpueWaX0/assembly.fasta
+
+Autocycler helper depth filter
+threshold = 3.000
+contig_1: depth=30.000, PASS
+
+[Sat Oct 11 15:59:39 EEST 2025] STEP 4: Compressing assemblies...
+
+Starting autocycler compress (2025-10-11 15:59:39)
+    This command finds all assemblies in the given input directory and
+compresses them into a compacted De Bruijn graph. This graph can then be used
+to recover the assemblies (with autocycler decompress) or generate a consensus
+assembly (with autocycler resolve).
+
+Settings:
+  --assemblies_dir assemblies
+  --autocycler_dir autocycler_out
+  --kmer 51
+  --threads 8
+
+
+Loading input assemblies (2025-10-11 15:59:39)
+    Input assemblies are now loaded and each contig is given a unique ID.
+
+   1: flye_01.fasta contig_1 (4350361 bp) [consensus weight = 2]
+   2: flye_02.fasta contig_1 (4350080 bp) [consensus weight = 2]
+   3: flye_03.fasta contig_1 (4350359 bp) [consensus weight = 2]
+   4: flye_04.fasta contig_1 (4350364 bp) [consensus weight = 2]
+
+4 sequences loaded from 4 assemblies
+
+
+Building k-mer De Bruijn graph (2025-10-11 15:59:39)
+    K-mers in the input sequences are now hashed to make a De Bruijn graph.
+
+Graph contains 8603922 k-mers
+
+
+Building compacted unitig graph (2025-10-11 15:59:48)
+    All non-branching paths are now collapsed to form a compacted De Bruijn
+graph, a.k.a. a unitig graph.
+
+742 unitigs, 1005 links
+total length: 4301961 bp
+
+
+Simplifying unitig graph (2025-10-11 16:00:12)
+    The graph structure is now simplified by moving sequence into repeat unitigs
+when possible.
+
+742 unitigs, 1005 links
+total length: 4291908 bp
+
+
+Finished! (2025-10-11 16:00:12)
+    You can now run autocycler cluster to group contigs based on their
+similarity.
+
+Compressed unitig graph: autocycler_out/input_assemblies.gfa
+Input assembly stats:    autocycler_out/input_assemblies.yaml
+Time to run: 0:00:32.849882
+
+
+[Sat Oct 11 16:00:12 EEST 2025] STEP 5: Clustering contigs...
+
+Starting autocycler cluster (2025-10-11 16:00:12)
+    This command takes a unitig graph (made by autocycler compress) and clusters
+the sequences based on their similarity. Ideally, each cluster will then contain
+sequences which can be combined into a consensus.
+
+Settings:
+  --autocycler_dir autocycler_out
+  --cutoff 0.2
+  --min_assemblies 2 (automatically set)
+  --max_contigs 25
+
+
+Pairwise distances (2025-10-11 16:00:12)
+    Every pairwise distance between contigs is calculated based on the
+similarity of their paths through the graph.
+
+4 sequences, 16 total pairwise distances
+
+Saving distance matrix:
+  autocycler_out/clustering/pairwise_distances.phylip
+
+
+Clustering sequences (2025-10-11 16:00:12)
+    Contigs are organise into a tree using UPGMA. Then clusters are defined from
+the tree using the distance cutoff.
+
+Saving clustering tree:
+  autocycler_out/clustering/clustering.newick
+
+Cluster 001:
+  flye_01.fasta contig_1 (4350361 bp) [consensus weight = 2]
+  flye_02.fasta contig_1 (4350080 bp) [consensus weight = 2]
+  flye_03.fasta contig_1 (4350359 bp) [consensus weight = 2]
+  flye_04.fasta contig_1 (4350364 bp) [consensus weight = 2]
+  cluster distance: 0.00007
+  passed QC
+
+
+Finished! (2025-10-11 16:00:12)
+    You can now run autocycler trim on each cluster. If you want to manually
+inspect the clustering, you can view the following files.
+
+Pairwise distances:         autocycler_out/clustering/pairwise_distances.phylip
+Clustering tree (Newick):   autocycler_out/clustering/clustering.newick
+Clustering tree (metadata): autocycler_out/clustering/clustering.tsv
+
+
+[Sat Oct 11 16:00:12 EEST 2025] STEP 6-7: Trimming and resolving clusters...
+[Sat Oct 11 16:00:12 EEST 2025] Processing cluster_001...
+
+Starting autocycler trim (2025-10-11 16:00:12)
+    This command takes a single-cluster unitig graph (made by autocycler
+cluster) and trims any overlaps. It looks for both start-end overlaps (can occur
+with circular sequences) and hairpin overlaps (can occur with linear sequences).
+
+Settings:
+  --cluster_dir autocycler_out/clustering/qc_pass/cluster_001
+  --min_identity 0.75
+  --max_unitigs 5000
+  --mad 5
+  --threads 8
+
+
+Loading graph (2025-10-11 16:00:12)
+    The unitig graph is now loaded into memory.
+
+742 unitigs, 1005 links
+total length: 4291908 bp
+
+
+Trim start-end overlaps (2025-10-11 16:00:12)
+    Paths for circular replicons may contain start-end overlaps. These overlaps
+are searched for and trimmed if found.
+
+flye_01.fasta contig_1 (4350361 bp) [consensus weight = 2]: not trimmed
+flye_02.fasta contig_1 (4350080 bp) [consensus weight = 2]: not trimmed
+flye_03.fasta contig_1 (4350359 bp) [consensus weight = 2]: not trimmed
+flye_04.fasta contig_1 (4350364 bp) [consensus weight = 2]: not trimmed
+
+
+Trim hairpin overlaps (2025-10-11 16:00:12)
+    Paths for linear replicons may contain hairpin overlaps at the start and/or
+end of the contig. These overlaps are searched for and trimmed if found.
+
+flye_01.fasta contig_1 (4350361 bp) [consensus weight = 2]: not trimmed
+flye_02.fasta contig_1 (4350080 bp) [consensus weight = 2]: not trimmed
+flye_03.fasta contig_1 (4350359 bp) [consensus weight = 2]: not trimmed
+flye_04.fasta contig_1 (4350364 bp) [consensus weight = 2]: not trimmed
+
+
+Exclude outliers (2025-10-11 16:00:12)
+    Sequences which vary too much in their length are now excluded from the
+cluster.
+
+Median sequence length:    4350360 bp
+Median absolute deviation: 2 bp
+Allowed length range:      4350350-4350370 bp
+
+flye_01.fasta contig_1 (4350361 bp) [consensus weight = 2]: kept
+flye_02.fasta contig_1 (4350080 bp) [consensus weight = 2]: excluded
+flye_03.fasta contig_1 (4350359 bp) [consensus weight = 2]: kept
+flye_04.fasta contig_1 (4350364 bp) [consensus weight = 2]: kept
+
+
+Clean graph (2025-10-11 16:00:12)
+    The unitig graph is now cleaned up based on any trimming and/or exclusion
+that has occurred above.
+
+725 unitigs, 983 links
+total length: 4291899 bp
+
+
+Finished! (2025-10-11 16:00:12)
+    You can now run autocycler resolve on this cluster. If you want to manually
+inspect the trimming, you can run autocycler dotplot on the sequences both
+before and after trimming.
+
+Unitig graph of trimmed sequences: autocycler_out/clustering/qc_pass/cluster_001/2_trimmed.gfa
+
+
+Starting autocycler resolve (2025-10-11 16:00:12)
+    This command resolves repeats in the unitig graph.
+
+Settings:
+  --cluster_dir autocycler_out/clustering/qc_pass/cluster_001
+
+
+Loading graph (2025-10-11 16:00:12)
+    The unitig graph is now loaded into memory.
+
+725 unitigs, 983 links
+total length: 4291899 bp
+
+
+Finding anchor unitigs (2025-10-11 16:00:12)
+    Anchor unitigs are those that occur once and only once in each sequence.
+They will definitely be present in the final sequence and will serve as the
+connection points for bridges.
+
+391 anchor unitigs found
+
+
+Building bridges (2025-10-11 16:00:12)
+    Bridges connect one anchor unitig to the next.
+
+     Unique bridges: 391
+Conflicting bridges: 0
+
+
+Applying unique bridges (2025-10-11 16:00:12)
+    All unique bridges (those that do not conflict with other bridges) are now
+applied to the graph, with linear paths merged to create consentigs.
+
+1 unitig, 1 link
+total length: 4350362 bp
+
+All bridges were unique, no culling necessary.
+
+
+Finished! (2025-10-11 16:00:12)
+Final consensus graph: autocycler_out/clustering/qc_pass/cluster_001/5_final.gfa
+
+
+[Sat Oct 11 16:00:12 EEST 2025] STEP 8: Creating final assembly...
+
+Starting autocycler combine (2025-10-11 16:00:12)
+    This command combines different clusters into a single assembly file.
+
+Settings:
+  --autocycler_dir autocycler_out
+  --in_gfas autocycler_out/clustering/qc_pass/cluster_001/5_final.gfa
+
+
+Combining clusters (2025-10-11 16:00:12)
+    This command combines different clusters into a single assembly file.
+
+autocycler_out/clustering/qc_pass/cluster_001/5_final.gfa
+1 unitig, 1 link (circular)
+total length: 4350362 bp
+
+
+Finished! (2025-10-11 16:00:12)
+Combined graph: autocycler_out/consensus_assembly.gfa
+Combined fasta: autocycler_out/consensus_assembly.fasta
+
+Consensus assembly is fully resolved 😄
+
+
+[Sat Oct 11 16:00:12 EEST 2025] STEP 9: Converting to FASTA...
+
+==========================================
+Pipeline completed: Sat Oct 11 16:00:12 EEST 2025
+==========================================
+
+✗ WARNING: Final assembly not found!
+==========================================

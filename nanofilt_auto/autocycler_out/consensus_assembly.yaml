@@ -1,0 +1,7 @@
+consensus_assembly_bases: 4350362
+consensus_assembly_unitigs: 1
+consensus_assembly_fully_resolved: true
+consensus_assembly_clusters:
+- length: 4350362
+  unitigs: 1
+  topology: circular

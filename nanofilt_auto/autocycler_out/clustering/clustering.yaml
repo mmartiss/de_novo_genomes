@@ -1,0 +1,9 @@
+pass_cluster_count: 1
+fail_cluster_count: 0
+pass_contig_count: 4
+fail_contig_count: 0
+pass_contig_fraction: 1.0
+fail_contig_fraction: 0.0
+cluster_balance_score: 1.0
+cluster_tightness_score: 0.9916069488474574
+overall_clustering_score: 0.9958034744237287

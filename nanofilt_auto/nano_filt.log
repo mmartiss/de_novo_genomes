@@ -1,0 +1,10 @@
+Starting NanoFilt filtering...
+NanoFilt completed successfully. Output: filtered_SRR34323118.fastq
+Starting autocycler...
+error: unexpected argument '-i' found
+
+Usage: autocycler <COMMAND>
+
+For more information, try '--help'.
+Autocycler completed successfully. Output: autocycled_SRR34323118.fastq
+Pipeline completed!

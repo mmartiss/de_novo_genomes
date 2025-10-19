@@ -1,0 +1,5 @@
+node_name	passing_clusters	all_clusters	sequence_id	file_name	contig_name	length	trusted	cluster_weight	consensus_weight
+1__flye_01.fasta__contig_1__4350361_bp	1	1	1	flye_01.fasta	contig_1	4350361	false	1	2
+2__flye_02.fasta__contig_1__4350080_bp	1	1	2	flye_02.fasta	contig_1	4350080	false	1	2
+3__flye_03.fasta__contig_1__4350359_bp	1	1	3	flye_03.fasta	contig_1	4350359	false	1	2
+4__flye_04.fasta__contig_1__4350364_bp	1	1	4	flye_04.fasta	contig_1	4350364	false	1	2
