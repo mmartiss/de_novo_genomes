@@ -25,4 +25,10 @@ $ wc -l not_found_clean.csv <br />
 224
 
 -----
+Kadangi failai per dideli, jei isdalinti i chuncks <br />
+/nanofilt_auto/SRR34323118.fastq <br />
+/nanofilt_auto/filtered_SRR34323118.fastq <br />
 
+
+$ split -l 18500 SRR34323118.fastq original.fastq_
+$ split -l 18500 filtered_SRR34323118.fastq filtered.fastq_
